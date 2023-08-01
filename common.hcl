@@ -45,6 +45,11 @@ generate "adotexporter_helmignore" {
   if_exists = "overwrite_terragrunt"
   contents  = local.helmignore
 }
+generate "aws_ebs_csi_helmignore" {
+  path      = "charts/aws-ebs-csi-driver/.helmignore"
+  if_exists = "overwrite_terragrunt"
+  contents  = local.helmignore
+}
 
 dependency "physical" {
   config_path = "${get_terragrunt_dir()}/../physical"
