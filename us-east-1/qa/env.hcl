@@ -7,12 +7,18 @@ locals {
   # The length of the Environment value must be 6 characters or less.
   environment = "qa"
 
+  # Whether this is a Managed or Unmanaged customer.
+  # We are unable to create or update DNS records automatically for unmanaged customers.
+  #
+  # Default: true
+  #managed_private_cloud = true
+
   # Additional identifier to be prepended to all resource names and included in their provisioned subdomain.
   #
   # Note: This variable can be set at stack creation via the CloudFormation template. If you do set this variable here
   # be sure to set OverrideRepositoryParameters setting to 'false' when creating the pipeline stack in CloudFormation.
   #
-  # Default: "dozuki
+  # Default: "dozuki"
   #customer = "dozuki"
 
   # The SSM parameter name that stores the Dozuki Customer ID provided to you. If empty Terraform will attempt to get
