@@ -24,10 +24,10 @@ provider "aws" {
 EOF
 }
 
-generate "managed_provider" {
-  path = "managed_provider.tf"
+generate "managed_provider_enabled" {
+  path      = "managed_provider.tf"
   if_exists = "overwrite_terragrunt"
-  disable = local.disable_managed_provider
+  disable   = local.disable_managed_provider
   contents  = <<EOF
 provider "aws" {
   alias  = "dns"
@@ -36,6 +36,17 @@ provider "aws" {
   assume_role {
     role_arn = "${local.dns_role}"
   }
+}
+EOF
+}
+
+generate "managed_provider_disabled" {
+  path      = "managed_provider.tf"
+  if_exists = "overwrite_terragrunt"
+  disable   = !local.disable_managed_provider
+  contents  = <<EOF
+provider "aws" {
+  alias  = "dns"
 }
 EOF
 }
