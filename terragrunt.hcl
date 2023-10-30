@@ -27,7 +27,7 @@ EOF
 generate "managed_provider" {
   path = "managed_provider.tf"
   if_exists = "overwrite_terragrunt"
-  disable = locals.disable_managed_provider
+  disable = local.disable_managed_provider
   contents  = <<EOF
 provider "aws" {
   alias  = "dns"
