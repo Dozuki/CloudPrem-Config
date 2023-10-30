@@ -7,6 +7,9 @@ locals {
 
   aws_region   = local.region_vars.locals.aws_region
 
+  # If we are NOT in managed private cloud, do not generate the DNS provider.
+  disable_managed_provider = !local.environment_vars.locals.managed_private_cloud
+
   dns_role = local.aws_region == "us-gov-west-1" ? "arn:aws-us-gov:iam::446787640263:role/Route53AccessRole" : "arn:aws:iam::010601635461:role/Route53AccessRole"
 }
 
@@ -18,6 +21,14 @@ generate "provider" {
 provider "aws" {
   region = "${local.aws_region}"
 }
+EOF
+}
+
+generate "managed_provider" {
+  path = "managed_provider.tf"
+  if_exists = "overwrite_terragrunt"
+  disable = locals.disable_managed_provider
+  contents  = <<EOF
 provider "aws" {
   alias  = "dns"
   region = "${local.aws_region}"

@@ -7,6 +7,12 @@ locals {
   # The length of the Environment value must be 6 characters or less.
   environment = "prod"
 
+  # Whether this is a Managed or Unmanaged customer.
+  # We are unable to create or update DNS records automatically for unmanaged customers.
+  #
+  # Default: true
+  #managed_private_cloud = true
+
   # Additional identifier to be prepended to all resource names and included in their provisioned subdomain.
   #
   # Note: This variable can be set at stack creation via the CloudFormation template. If you do set this variable here
