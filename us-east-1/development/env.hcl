@@ -10,8 +10,8 @@ locals {
   # Whether this is a Managed or Unmanaged customer.
   # We are unable to create or update DNS records automatically for unmanaged customers.
   #
-  # Default: true
-  #managed_private_cloud = true
+  # Note: This config option has been moved to the root terragrunt.hcl: managed_private_cloud = false for unmanaged
+  #       private cloud.
 
   # Additional identifier to be prepended to all resource names and included in their provisioned subdomain.
   #
@@ -164,6 +164,16 @@ locals {
   # --- END Networking Configuration --- #
 
   # --- BEGIN EKS & Worker Node Configuration --- #
+
+  # The version of Kubernetes/EKS to install. This has implications for the version of infra you are installing. Be sure
+  # to check compatibility before changing this value.
+  #
+  # Note: This can only be incremented once created.
+  #
+  # Possible options: 1.23, 1.24, 1.25, 1.26, 1.27, 1.28
+  # Default: 1.27
+  #eks_k8s_version = 1.27
+
 
   # The instance types for the spot fleet in the application's EKS worker node group.
   #
